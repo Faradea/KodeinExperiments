@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.macgavrina.kodeinexperiments.R
+import com.macgavrina.kodeinexperiments.data.DB.Database
 import com.macgavrina.kodeinexperiments.data.model.Quote
 import kotlinx.android.synthetic.main.activity_quotes.*
 import org.kodein.di.Kodein
@@ -16,8 +17,14 @@ class QuotesActivity : AppCompatActivity(), KodeinAware {
 
     override val kodein by closestKodein()
 
-    //This is done using Kodein
-    private val viewModelFactory: QuotesViewModelFactory by instance()
+    //This is done using Kodein, all variables are initiated lazy!!!
+
+//    val diceFactory: (Int) -> Dice by kodein.factory()
+//    val dataSource: DataSource by kodein.instance()
+//    val randomProvider: () -> Random by kodein.provider()
+//    val answerConstant: String by kodein.instance(tag = "answer")
+    private val viewModelFactory: QuotesViewModelFactory by kodein.instance()
+    private val database: Database by kodein.instance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
